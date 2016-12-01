@@ -63,7 +63,24 @@ describe 'icingaweb2', :type => :class do
   end
 
   describe 'with parameter: auth_backend' do
-    pending
+    context 'auth_backend => db' do
+      let (:params) { { :auth_backend => 'db' } }
+      it {
+        should contain_icingaweb2__config__authentication_database('Local Database Authentication').with('auth_section' => 'icingaweb2')
+      }
+    end
+    context 'auth_backend => external' do
+      let (:params) { { :auth_backend => 'external' } }
+      it {
+        should contain_icingaweb2__config__authentication_external('External Authentication').with('auth_section' => 'icingaweb2')
+      }
+    end
+    context 'auth_backend => ldap' do
+      let (:params) { { :auth_backend => 'ldap' } }
+      it {
+        should contain_icingaweb2__config__authentication_ldap('LDAP Authentication').with('auth_section' => 'icingaweb2')
+      }
+    end
   end
 
   describe 'with parameter: auth_resource' do
@@ -286,14 +303,14 @@ describe 'icingaweb2', :type => :class do
         let (:params) { { :initialize => true, :install_method => 'git' } }
         let (:facts) { centos_facts }
 
-        it { should contain_icingaweb2__initialize }
+        it { should contain_class('icingaweb2::initialize') }
         it { should contain_exec('create db scheme').with_command("mysql --defaults-file='/root/.my.cnf' icingaweb2 < /usr/share/icingaweb2/etc/schema/mysql.schema.sql") }
       end
       context 'install_method => package' do
         let (:params) { { :initialize => true, :install_method => 'package' } }
         let (:facts) { centos_facts }
 
-        it { should contain_icingaweb2__initialize }
+        it { should contain_class('icingaweb2::initialize') }
         it { should contain_exec('create db scheme').with_command("mysql --defaults-file='/root/.my.cnf' icingaweb2 < /usr/share/doc/icingaweb2/schema/mysql.schema.sql") }
       end
     end
