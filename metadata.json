@@ -1,18 +1,20 @@
 {
   "name": "icinga-icingaweb2",
   "version": "1.0.6",
-  "author": "Tom De Vylder",
-  "summary": "Module to install and maintain IcingaWeb2",
+  "author": "Icinga Development Team",
+  "summary": "Module to install and maintain Icinga Web 2",
   "license": "Apache-2.0",
-  "source": "https://git.icinga.org/puppet-icingaweb2.git",
-  "project_page": "https://dev.icinga.org/projects/puppet-icingaweb2",
-  "issues_url": "https://dev.icinga.org/projects/puppet-icingaweb2",
+  "source": "https://github.com/Icinga/puppet-icingaweb2.git",
+  "project_page": "https://github.com/Icinga/puppet-icingaweb2",
+  "issues_url": "https://github.com/Icinga/puppet-icingaweb2/issues",
   "dependencies": [
     {"name":"puppetlabs/apache","version_requirement":">= 1.2.0 < 2.0.0"},
-    {"name":"puppetlabs/concat","version_requirement":">= 1.2.0 < 2.0.0"},
     {"name":"puppetlabs/inifile","version_requirement":">= 1.2.0 < 2.0.0"},
     {"name":"puppetlabs/stdlib","version_requirement":">= 4.4.0 < 5.0.0"},
     {"name":"puppetlabs/vcsrepo","version_requirement":">= 1.2.0 < 2.0.0"}
+  ],
+  "requirements": [
+    { "name": "puppet", "version_requirement": ">= 3.8.0 < 5.0.0" }
   ],
   "data_provider": null,
   "description": "This module install IcingaWeb2",
@@ -31,52 +33,26 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "6.0",
-        "6.1",
-        "6.2",
-        "6.3",
-        "6.4",
-        "6.5",
-        "6.6",
-        "6.6",
-        "6.7",
-        "6.9",
-        "7.0",
-        "7.1",
-        "7.2",
-        "7.3",
-        "7.4",
-        "7.5"
+        "7", "8"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "6.0",
-        "6.1",
-        "6.2",
-        "6.3",
-        "6.4",
-        "6.5",
-        "6.6",
-        "6.7",
-        "7.0.1406",
-        "7.1.1503"
+        "6", "7"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "6.0",
-        "6.1",
-        "6.2",
-        "6.3",
-        "6.4",
-        "6.5",
-        "6.6",
-        "6.7",
-        "7.0.1406",
-        "7.1.1503"
+        "6", "7"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04",
+        "16.04"
       ]
     }
   ]
