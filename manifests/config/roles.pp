@@ -1,12 +1,11 @@
 # Define for setting IcingaWeb2 Roles
 #
 define icingaweb2::config::roles (
-  $role_groups         = undef,
-  $role_host_filter    = undef,
-  $role_name           = $title,
-  $role_permissions    = undef,
-  $role_service_filter = undef,
-  $role_users          = undef,
+  $role_groups                    = undef,
+  $role_name                      = $title,
+  $role_permissions               = undef,
+  $role_monitoring_filter_objects = undef,
+  $role_users                     = undef,
 ) {
   validate_string($role_name)
 
@@ -59,32 +58,17 @@ define icingaweb2::config::roles (
     value   => "\"${role_permissions}\"",
   }
 
-  if $role_host_filter {
-    validate_string($role_host_filter)
-    $role_host_filter_ensure = present
+  if $role_monitoring_filter_objects {
+    validate_string($role_monitoring_filter_objects)
+    $role_monitoring_filter_objects_ensure = present
   }
   else {
-    $role_host_filter_ensure = absent
+    $role_monitoring_filter_objects_ensure = absent
   }
 
-  ini_setting { "icingaweb2 roles ${title} host filter":
-    ensure  => $role_host_filter_ensure,
-    setting => 'monitoring/hosts/filter',
-    value   => "\"${role_host_filter}\"",
-  }
-
-  if $role_service_filter {
-    validate_string($role_service_filter)
-    $role_service_filter_ensure = present
-  }
-  else {
-    $role_service_filter_ensure = absent
-  }
-
-  ini_setting { "icingaweb2 roles ${title} service filter":
-    ensure  => $role_service_filter_ensure,
-    setting => 'monitoring/services/filter',
-    value   => "\"${role_service_filter}\"",
+  ini_setting { "icingaweb2 roles ${title} monitoring filter objects":
+    ensure  => $role_monitoring_filter_objects_ensure,
+    setting => 'monitoring/filter/objects',
+    value   => "\"${role_monitoring_filter_objects}\"",
   }
 }
-
